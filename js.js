@@ -8,7 +8,7 @@ controller('search', ['$scope', '$http', function ($scope, $http) {
 		$scope.users = res.data;
 
 		angular.forEach($scope.users, function (value) {
-			value.Bio = value.First + /*' ' + value.Last +*/ ' ' + value.Bio;
+			value.bio = value.first + /*' ' + value.Last +*/ ' ' + value.bio;
 		});
 
 		// // Image Pre-loader (dumb ... think about lazy pre-loading images)
@@ -23,7 +23,7 @@ controller('search', ['$scope', '$http', function ($scope, $http) {
 		// 		image.onload();
 		// 	};
 		// 	image.onload();
-		// })( $scope.users, function (obj) { return 'img/' + obj.Last + ', ' + obj.First + '.jpg'; } );
+		// })( $scope.users, function (obj) { return 'img/' + obj.last + ', ' + obj.first + '.jpg'; } );
 	});
 
 	// Searching
@@ -42,12 +42,12 @@ controller('search', ['$scope', '$http', function ($scope, $http) {
 
 	// Order By
 	$scope.fields = [
-		{field: ['First','Last'], disp: 'First Name'},
-		{field: ['Last','First'], disp: 'Last Name'},
-		{field: ['TITLE','First','Last'], disp: 'Title'},
-		{field: ['COMPANY','First','Last'], disp: 'Company'},
-		{field: ['CITY','STATE','First','Last'], disp: 'City'},
-		{field: ['STATE','CITY','First','Last'], disp: 'State'}
+		{field: ['first','last'], disp: 'First Name'},
+		{field: ['last','first'], disp: 'Last Name'},
+		{field: ['title','first','last'], disp: 'Title'},
+		{field: ['company','first','last'], disp: 'Company'},
+		{field: ['city','state','first','last'], disp: 'City'},
+		{field: ['state','city','first','last'], disp: 'State'}
 	];
 	$scope.field = $scope.fields[0].field;
 	$scope.sort_order = false;
@@ -62,7 +62,7 @@ filter('pagination', function () {
 
 directive('pagination', function () {
 	return {
-		restrict: 'E',
+		restrict: 'AE',
 		scope: {
 			numPages: '=',
 			currentPage: '=',
