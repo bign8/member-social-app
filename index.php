@@ -65,7 +65,7 @@
 			<div class="page-header">
 				<h1>Welcome to ELA</h1>
 			</div>
-			<img class="pull-right img-responsive col-sm-3 hidden-xs img-rounded" src="data/img/buiz2.jpg">
+			<img class="pull-right img-responsive col-sm-3 hidden-xs img-rounded" src="data/img/buiz2.jpg" alt="Business">
 			<p class="lead">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac eleifend nisl. Mauris vitae tincidunt turpis, quis facilisis orci. Maecenas elementum sapien vitae libero semper commodo. Quisque tincidunt, dui vitae laoreet sollicitudin, sem tellus interdum odio, eu ornare tellus tellus ac tortor. Nulla laoreet urna ligula, ut ultrices dui ultricies et. Proin in viverra tellus. Duis vel sem quis neque molestie vehicula id eu mauris. Mauris eleifend ut est at luctus. Sed nec ligula a lectus ultricies bibendum viverra vitae ante. Suspendisse fringilla turpis nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum nisl urna, non dictum dolor facilisis eu.
 			</p>
@@ -88,7 +88,7 @@
 			<div class="page-header">
 				<h1>About</h1>
 			</div>
-			<img class="pull-right img-responsive col-sm-3 hidden-xs img-rounded" src="data/img/buiz1.jpg">
+			<img class="pull-right img-responsive col-sm-3 hidden-xs img-rounded" src="data/img/buiz1.jpg" alt="Business">
 			<p class="lead">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac eleifend nisl. Mauris vitae tincidunt turpis, quis facilisis orci. Maecenas elementum sapien vitae libero semper commodo. Quisque tincidunt, dui vitae laoreet sollicitudin, sem tellus interdum odio, eu ornare tellus tellus ac tortor. Nulla laoreet urna ligula, ut ultrices dui ultricies et. Proin in viverra tellus. Duis vel sem quis neque molestie vehicula id eu mauris. Mauris eleifend ut est at luctus. Sed nec ligula a lectus ultricies bibendum viverra vitae ante. Suspendisse fringilla turpis nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum nisl urna, non dictum dolor facilisis eu.
 			</p>
@@ -231,7 +231,7 @@
 				</div>
 			</div>
 			<div class="col-sm-3 hidden-xs">
-				<img class="img-responsive img-rounded" src="data/img/buiz3.jpg">
+				<img class="img-responsive img-rounded" src="data/img/buiz3.jpg" alt="Business">
 			</div>
 		</div>
 
@@ -259,7 +259,7 @@
 				<div class="col-md-3 col-sm-4 hidden-xs"><!-- order -->
 					<div class="input-group">
 						<label class="input-group-addon" for="search_order">Order</label>
-						<select ng-model="field" class="form-control" id="search_order" 
+						<select data-ng-model="field" class="form-control" id="search_order" 
 							data-ng-options="x.field as x.disp for x in fields" 
 							data-ng-change="sort_order=false">
 							<option value="" disabled>Order By...</option>
@@ -274,51 +274,52 @@
 				<div class="col-md-2 hidden-xs hidden-sm"><!-- pagination -->
 					<div class="input-group">
 						<label class="input-group-addon" for="search_page">Limit</label>
-						<select ng-model="limit" class="form-control" id="search_page" data-ng-options="x for x in limits">
+						<select data-ng-model="limit" class="form-control" id="search_page" data-ng-options="x for x in limits">
 							<option value="" disabled>Per Page...</option>
 						</select>
+					</div>
 				</div>
-			</div>
-			<div style="min-height: 600px" class="col-xs-12"><!-- eases the scroll jerk on small searches -->
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>Contact</th>
-							<th style="width:75%" class="hidden-xs">
-								<small class="pull-right text-right" style="font-weight:normal" data-ng-bind="total_rows()"></small>
-								Bio
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="user in (filtered_users = (users | filter:search_str)) | orderBy:field:sort_order | pagination:page:limit">
-							<td>
-								<div class="center-cropped pull-left img-rounded">
-									<img data-ng-src="img/{{user.Last}}, {{user.First}}.jpg" class="img-rounded" height="100px" 
-										data-ng-attr-title="{{user.First}} {{user.Last}}"
-										data-ng-attr-alt="{{user.First}} {{user.Last}}" />
-								</div>
-								<strong>
-									<span data-ng-bind="user.First">John</span>&nbsp;
-									<span data-ng-bind="user.Last">Doe</span>
-								</strong><br/>
-								<small data-ng-bind="user.TITLE">Intern</small><br/>
-								<span class="text-muted">
-									<span data-ng-bind="user.COMPANY">Temporary INC.</span><br/>
-									<span data-ng-bind="user.CITY">Two Dot</span>,&nbsp;<span data-ng-bind="user.STATE">MT</span>
-								</span>
-							</td>
-							<td data-ng-bind="user.Bio" class="hidden-xs">was an amazing ...</td>
-						</tr>
-					</tbody>
-				</table>
+				<div style="min-height: 600px" class="col-xs-12"><!-- eases the scroll jerk on small searches -->
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Contact</th>
+								<th style="width:75%" class="hidden-xs">
+									<small class="pull-right text-right" style="font-weight:normal" data-ng-bind="total_rows()"></small>
+									Bio
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr data-ng-repeat="user in (filtered_users = (users | filter:search_str)) | orderBy:field:sort_order | pagination:page:limit">
+								<td>
+									<div class="center-cropped pull-left img-rounded">
+										<img data-ng-src="img/{{user.last}}, {{user.first}}.jpg" class="img-rounded" height="100" 
+										data-ng-attr-title="{{user.first}} {{user.last}}"
+										data-ng-attr-alt="{{user.first}} {{user.last}}" alt="John Doe" src="data/img/Doe,%20John.jpg" />
+									</div>
+									<strong>
+										<span data-ng-bind="user.first">John</span>&nbsp;
+										<span data-ng-bind="user.last">Doe</span>
+									</strong><br/>
+									<small data-ng-bind="user.title">Intern</small><br/>
+									<span class="text-muted">
+										<span data-ng-bind="user.company">Temporary INC.</span><br/>
+										<span data-ng-bind="user.city">Two Dot</span>,&nbsp;<span data-ng-bind="user.state">MT</span>
+									</span>
+								</td>
+								<td data-ng-bind="user.bio" class="hidden-xs">was an amazing ...</td>
+							</tr>
+						</tbody>
+					</table>
 
-				<div class="text-center" data-ng-show="pages() !== 1"><!-- pager -->
-					<pagination num-pages="pages()" current-page="page" max-show="5"></pagination>
+					<div class="text-center" data-ng-show="pages() !== 1"><!-- pager -->
+						<span data-pagination data-num-pages="pages()" data-current-page="page" data-max-show="5"></span>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</div><!-- ./wrap -->
 
 	<div id="footer">
 		<div class="container">
@@ -333,6 +334,7 @@
 			</p>
 		</div>
 	</div>
+
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
