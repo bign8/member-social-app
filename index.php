@@ -1,7 +1,6 @@
 <?php
-	$auth = true;
+	$auth = !isset($_REQUEST['noauth']);
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,7 +24,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#">ELA</a>
+					<a class="navbar-brand" href="#home">ELA</a>
 				</div>
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
@@ -57,7 +56,7 @@
 								</ul>
 							</li>
 						<?php else: ?>
-							<li><a href="#">Login</a></li>
+							<li><a href="#login">Login</a></li>
 						<?php endif; ?>
 					</ul>
 				</div><!--/.nav-collapse -->
@@ -321,6 +320,29 @@
 						<div class="text-center" data-ng-show="pages() !== 1"><!-- pager -->
 							<span data-pagination data-num-pages="pages()" data-current-page="page" data-max-show="5"></span>
 						</div>
+					</div>
+				</div>
+			</div>
+		<?php endif; ?>
+	
+		<?php if (!$auth): ?>
+			<div class="container" id="login">
+				<div class="page-header">
+					<h1>Login</h1>
+				</div>
+				<div class="col-sm-6 col-sm-offset-3">
+					<div class="well">
+						<form role="form" action="index.php">
+							<div class="form-group">
+								<label for="exampleInputEmail1">Email address</label>
+								<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+							</div>
+							<div class="form-group">
+								<label for="exampleInputPassword1">Password</label>
+								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+							</div>
+							<button type="submit" class="btn btn-primary">Login</button>
+						</form>
 					</div>
 				</div>
 			</div>
