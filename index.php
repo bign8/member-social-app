@@ -27,11 +27,11 @@
 					<ul class="nav navbar-nav">
 						<li class="active"><a href="#home">Home</a></li>
 						<li><a href="#about">About</a></li>
-						<li><a href="#faq">FAQ</a></li>
-						<li><a href="#contacts">Contacts</a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
 							<ul class="dropdown-menu">
+								<li><a href="#faq">FAQ</a></li>
+								<li><a href="#contacts">Contacts</a></li>
 								<li><a href="http://ela.upstreamacademy.com/" target="blank">Progress Tracker</a></li>
 								<li><a href="#">Project Samples</a></li>
 								<li class="divider"></li>
