@@ -32,23 +32,6 @@
 		-------------------------------------------------- */
 		/*#wrap > .container { min-height: 600px; }*/
 		img.pull-right { padding: 0; margin: 0 0 1em 1em; }
-		.center-cropped {
-		    width: 75px;
-		    height: 100px;
-		    background-position: center center;
-		    background-repeat: no-repeat;
-		    overflow: hidden;
-		    border-radius: 10px;
-		}
-
-		/* Set the image to fill its parent and make transparent */
-		.center-cropped img {
-		   min-height: 100px;
-		   min-width: 100px;
-		   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; /* IE 8 */
-		   filter: alpha(opacity=0); /* IE 5-7 */
-		   opacity: 0; /* modern browsers */
-		}
 	</style>
 </head>
 <body data-spy="scroll" data-target=".navbar">
