@@ -11,19 +11,19 @@ controller('search', ['$scope', '$http', function ($scope, $http) {
 			value.Bio = value.First + /*' ' + value.Last +*/ ' ' + value.Bio;
 		});
 
-		// Image Pre-loader
-		(function (queue, mapper) {
-			mapper = mapper || function (obj) { return obj; };
-			var image = new Image(), index = 0;
-			image.onload = function () {
-				if (index < queue.length) image.src = mapper( queue[index++] );
-			};
-			image.onerror = function (e) {
-				console.log(e);
-				image.onload();
-			};
-			image.onload();
-		})( $scope.users, function (obj) { return 'img/' + obj.Last + ', ' + obj.First + '.jpg'; } );
+		// // Image Pre-loader (dumb ... think about lazy pre-loading images)
+		// (function (queue, mapper) {
+		// 	mapper = mapper || function (obj) { return obj; };
+		// 	var image = new Image(), index = 0;
+		// 	image.onload = function () {
+		// 		if (index < queue.length) image.src = mapper( queue[index++] );
+		// 	};
+		// 	image.onerror = function (e) {
+		// 		console.log(e);
+		// 		image.onload();
+		// 	};
+		// 	image.onload();
+		// })( $scope.users, function (obj) { return 'img/' + obj.Last + ', ' + obj.First + '.jpg'; } );
 	});
 
 	// Searching
