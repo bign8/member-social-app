@@ -1,3 +1,15 @@
+// jQuery soft scroll
+jQuery.fn.scroll_top = function() {
+	jQuery('html, body').animate({
+		scrollTop: parseInt( this.offset().top, 10 )
+	}, 500);
+};
+jQuery('ul.nav a,a.navbar-brand').click( function (e){
+	if (e.target.hash) jQuery( e.target.hash ).scroll_top();
+	e.preventDefault();
+});
+
+// angular application
 angular.module('ela', []).
 
 controller('search', ['$scope', '$http', function ($scope, $http) {
