@@ -4,35 +4,7 @@
 	<meta charset="UTF-8">
 	<title>ELA - App</title>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
-	<style>
-		/* Sticky footer styles
-		-------------------------------------------------- */
-		html, body { height: 100%; } /* The html and body elements cannot have any padding or margin. */
-		#wrap { /* Wrapper for page content to push down footer */
-		  min-height: 100%;
-		  height: auto !important;
-		  height: 100%;
-		  margin: 0 auto -60px; /* Negative indent footer by its height */
-		  /*padding: 0 0 60px;  Pad bottom by footer height */
-		}
-		#footer { /* Set the fixed height of the footer here */
-		  height: 60px;
-		  background-color: #f5f5f5;
-		}
-
-		/* Custom page CSS
-		-------------------------------------------------- */
-		/* Not required for template or sticky footer method. */
-		#wrap > .container { padding: 60px 15px 0; }
-		.container .credit { margin: 20px 0; }
-		#footer > .container { padding-left: 15px; padding-right: 15px; }
-		code { font-size: 80%; }
-
-		/* Nate page CSS
-		-------------------------------------------------- */
-		/*#wrap > .container { min-height: 600px; }*/
-		img.pull-right { padding: 0; margin: 0 0 1em 1em; }
-	</style>
+	<link href="css.css" rel="stylesheet">
 </head>
 <body data-spy="scroll" data-target=".navbar">
 	<!-- Wrap all page content here -->
@@ -166,7 +138,7 @@
 				<thead>
 					<tr>
 						<th>Contact</th>
-						<th style="width:70%" class="hidden-xs">
+						<th style="width:75%" class="hidden-xs">
 							<small class="pull-right text-right" style="font-weight:normal" data-ng-bind="total_rows()"></small>
 							Bio
 						</th>
@@ -175,11 +147,11 @@
 				<tbody>
 					<tr ng-repeat="user in (filtered_users = (users | filter:search_str)) | orderBy:field:sort_order | pagination:page:limit">
 						<td>
-							<!-- <div class="center-cropped pull-right" style="background-image: url('img/{{user.Last}}, {{user.First}}.jpg');"> -->
-								<img data-ng-src="img/{{user.Last}}, {{user.First}}.jpg" class="img-rounded pull-left" height="100px" width="75px"
+							<div class="center-cropped pull-left img-rounded">
+								<img data-ng-src="img/{{user.Last}}, {{user.First}}.jpg" class="img-rounded" height="100px" 
 									data-ng-attr-title="{{user.First}} {{user.Last}}"
-									data-ng-attr-alt="{{user.First}} {{user.Last}}" style="margin-right: .5em" />
-							<!-- </div> -->
+									data-ng-attr-alt="{{user.First}} {{user.Last}}" />
+							</div>
 							<strong>
 								<span data-ng-bind="user.First">John</span>&nbsp;
 								<span data-ng-bind="user.Last">Doe</span>
