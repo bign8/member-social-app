@@ -1,3 +1,7 @@
+<?php
+	$auth = true;
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -31,7 +35,7 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="#faq">FAQ</a></li>
-								<li><a href="#contacts">Contacts</a></li>
+								<?php if ($auth): ?><li><a href="#contacts">Contacts</a></li><?php endif; ?>
 								<li><a href="http://ela.upstreamacademy.com/" target="blank">Progress Tracker</a></li>
 								<li><a href="#">Project Samples</a></li>
 								<li class="divider"></li>
@@ -42,7 +46,7 @@
 						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<?php if (true): /* check authentication */ ?>
+						<?php if ($auth): ?>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo "John Doe"; ?> <b class="caret"></b></a>
 								<ul class="dropdown-menu">
@@ -54,7 +58,7 @@
 							</li>
 						<?php else: ?>
 							<li><a href="#">Login</a></li>
-						<?php endif; /* end authentication check */ ?>
+						<?php endif; ?>
 					</ul>
 				</div><!--/.nav-collapse -->
 			</div>
@@ -235,90 +239,92 @@
 			</div>
 		</div>
 
-		<!-- Begin SEARCH content -->
-		<div class="container" id="contacts" data-ng-controller="search">
-			<div class="page-header">
-				<h1>Contacts</h1>
-			</div>
-			<p class="lead">
-				Find your friends and colleagues from ELA right here.
-			</p>
+		<?php if ($auth): ?>
+			<!-- Begin SEARCH content -->
+			<div class="container" id="contacts" data-ng-controller="search">
+				<div class="page-header">
+					<h1>Contacts</h1>
+				</div>
+				<p class="lead">
+					Find your friends and colleagues from ELA right here.
+				</p>
 
-			<div class="row">
-				<div class="col-md-7 col-sm-8"><!-- search -->
-					<div class="input-group">
-						<label class="input-group-addon" for="search_field">Search</label>
-						<input type="text" class="form-control" id="search_field" placeholder="Type here..." data-ng-model="search_str">
-						<span class="input-group-btn">
-							<button class="btn btn-danger" data-ng-click="search_str=''">
-								<i class="glyphicon glyphicon-remove" style="top:2px"></i>
-							</button>
-						</span>
+				<div class="row">
+					<div class="col-md-7 col-sm-8"><!-- search -->
+						<div class="input-group">
+							<label class="input-group-addon" for="search_field">Search</label>
+							<input type="text" class="form-control" id="search_field" placeholder="Type here..." data-ng-model="search_str">
+							<span class="input-group-btn">
+								<button class="btn btn-danger" data-ng-click="search_str=''">
+									<i class="glyphicon glyphicon-remove" style="top:2px"></i>
+								</button>
+							</span>
+						</div>
 					</div>
-				</div>
-				<div class="col-md-3 col-sm-4 hidden-xs"><!-- order -->
-					<div class="input-group">
-						<label class="input-group-addon" for="search_order">Order</label>
-						<select data-ng-model="field" class="form-control" id="search_order" 
-							data-ng-options="x.field as x.disp for x in fields" 
-							data-ng-change="sort_order=false">
-							<option value="" disabled>Order By...</option>
-						</select>
-						<span class="input-group-btn">
-							<button class="btn btn-info" data-ng-click="sort_order=!sort_order">
-								<i class="glyphicon" data-ng-class="{'glyphicon-chevron-down':sort_order, 'glyphicon-chevron-up':!sort_order}"></i>
-							</button>
-						</span>
+					<div class="col-md-3 col-sm-4 hidden-xs"><!-- order -->
+						<div class="input-group">
+							<label class="input-group-addon" for="search_order">Order</label>
+							<select data-ng-model="field" class="form-control" id="search_order" 
+								data-ng-options="x.field as x.disp for x in fields" 
+								data-ng-change="sort_order=false">
+								<option value="" disabled>Order By...</option>
+							</select>
+							<span class="input-group-btn">
+								<button class="btn btn-info" data-ng-click="sort_order=!sort_order">
+									<i class="glyphicon" data-ng-class="{'glyphicon-chevron-down':sort_order, 'glyphicon-chevron-up':!sort_order}"></i>
+								</button>
+							</span>
+						</div>
 					</div>
-				</div>
-				<div class="col-md-2 hidden-xs hidden-sm"><!-- pagination -->
-					<div class="input-group">
-						<label class="input-group-addon" for="search_page">Limit</label>
-						<select data-ng-model="limit" class="form-control" id="search_page" data-ng-options="x for x in limits">
-							<option value="" disabled>Per Page...</option>
-						</select>
+					<div class="col-md-2 hidden-xs hidden-sm"><!-- pagination -->
+						<div class="input-group">
+							<label class="input-group-addon" for="search_page">Limit</label>
+							<select data-ng-model="limit" class="form-control" id="search_page" data-ng-options="x for x in limits">
+								<option value="" disabled>Per Page...</option>
+							</select>
+						</div>
 					</div>
-				</div>
-				<div style="min-height: 600px" class="col-xs-12"><!-- eases the scroll jerk on small searches -->
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Contact</th>
-								<th style="width:75%" class="hidden-xs">
-									<small class="pull-right text-right" style="font-weight:normal" data-ng-bind="total_rows()"></small>
-									Bio
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr data-ng-repeat="user in (filtered_users = (users | filter:search_str)) | orderBy:field:sort_order | pagination:page:limit">
-								<td>
-									<div class="center-cropped pull-left img-rounded">
-										<img data-ng-src="img/{{user.last}}, {{user.first}}.jpg" class="img-rounded" height="100" 
-										data-ng-attr-title="{{user.first}} {{user.last}}"
-										data-ng-attr-alt="{{user.first}} {{user.last}}" alt="John Doe" src="data/img/Doe,%20John.jpg" />
-									</div>
-									<strong>
-										<span data-ng-bind="user.first">John</span>&nbsp;
-										<span data-ng-bind="user.last">Doe</span>
-									</strong><br/>
-									<small data-ng-bind="user.title">Intern</small><br/>
-									<span class="text-muted">
-										<span data-ng-bind="user.company">Temporary INC.</span><br/>
-										<span data-ng-bind="user.city">Two Dot</span>,&nbsp;<span data-ng-bind="user.state">MT</span>
-									</span>
-								</td>
-								<td data-ng-bind="user.bio" class="hidden-xs">was an amazing ...</td>
-							</tr>
-						</tbody>
-					</table>
+					<div style="min-height: 600px" class="col-xs-12"><!-- eases the scroll jerk on small searches -->
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Contact</th>
+									<th style="width:75%" class="hidden-xs">
+										<small class="pull-right text-right" style="font-weight:normal" data-ng-bind="total_rows()"></small>
+										Bio
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr data-ng-repeat="user in (filtered_users = (users | filter:search_str)) | orderBy:field:sort_order | pagination:page:limit">
+									<td>
+										<div class="center-cropped pull-left img-rounded">
+											<img data-ng-src="img/{{user.last}}, {{user.first}}.jpg" class="img-rounded" height="100" 
+											data-ng-attr-title="{{user.first}} {{user.last}}"
+											data-ng-attr-alt="{{user.first}} {{user.last}}" alt="John Doe" src="data/img/Doe,%20John.jpg" />
+										</div>
+										<strong>
+											<span data-ng-bind="user.first">John</span>&nbsp;
+											<span data-ng-bind="user.last">Doe</span>
+										</strong><br/>
+										<small data-ng-bind="user.title">Intern</small><br/>
+										<span class="text-muted">
+											<span data-ng-bind="user.company">Temporary INC.</span><br/>
+											<span data-ng-bind="user.city">Two Dot</span>,&nbsp;<span data-ng-bind="user.state">MT</span>
+										</span>
+									</td>
+									<td data-ng-bind="user.bio" class="hidden-xs">was an amazing ...</td>
+								</tr>
+							</tbody>
+						</table>
 
-					<div class="text-center" data-ng-show="pages() !== 1"><!-- pager -->
-						<span data-pagination data-num-pages="pages()" data-current-page="page" data-max-show="5"></span>
+						<div class="text-center" data-ng-show="pages() !== 1"><!-- pager -->
+							<span data-pagination data-num-pages="pages()" data-current-page="page" data-max-show="5"></span>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		<?php endif; ?>
 	</div><!-- ./wrap -->
 
 	<div id="footer">
