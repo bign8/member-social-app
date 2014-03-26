@@ -40,3 +40,10 @@ img.pull-right { padding: 0; margin: 0 0 1em 1em; }
 	bottom: -100%;
 	margin: auto;
 }
+.social {
+	margin-top: 16px;
+}
+.social a {
+	line-height: 0;
+	font-size: 30px;
+}

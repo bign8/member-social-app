@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>ELA - App</title>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	<link href="css.css" rel="stylesheet">
 </head>
 <body data-spy="scroll" data-target=".navbar">
@@ -175,6 +176,11 @@
 
 	<div id="footer">
 		<div class="container">
+			<p class="pull-right social">
+				<a href="http://www.linkedin.com/groups?gid=4403897" target="blank">
+					<i class="fa fa-linkedin-square text-muted"></i>
+				</a>
+			</p>
 			<p class="text-muted credit">
 				&copy; <a href="http://upstreamacademy.com">Upstream Academy</a> 
 				<script>document.write(new Date().getFullYear())</script>
