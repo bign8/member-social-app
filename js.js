@@ -7,30 +7,23 @@ controller('search', ['$scope', '$http', function ($scope, $http) {
 	$http.get('search.php').then(function (res) {
 		$scope.users = res.data;
 
-		var imgQueue = [];
 		angular.forEach($scope.users, function (value) {
 			value.Bio = value.First + /*' ' + value.Last +*/ ' ' + value.Bio;
-			imgQueue.push(value);
 		});
 
-		// Image queue Processor
-		(function ( queue ) {
-			var image = new Image(), user;
-			var queue_handler = function () {
-				if (queue.length) {
-					user = queue.shift();
-					image.src = 'img/' + user.Last + ', ' + user.First + '.jpg';
-				}
+		// Image Pre-loader
+		(function (queue, mapper) {
+			mapper = mapper || function (obj) { return obj; };
+			var image = new Image(), index = 0;
+			image.onload = function () {
+				if (index < queue.length) image.src = mapper( queue[index++] );
 			};
-			image.onload = queue_handler;
 			image.onerror = function (e) {
-				console.log('Image Frefetch Error');
 				console.log(e);
-				queue_handler();
+				image.onload();
 			};
-			queue_handler();
-		})( imgQueue );
-		
+			image.onload();
+		})( $scope.users, function (obj) { return 'img/' + obj.Last + ', ' + obj.First + '.jpg'; } );
 	});
 
 	// Searching
