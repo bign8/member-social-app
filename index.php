@@ -279,7 +279,7 @@
 						</select>
 				</div>
 			</div>
-			<div style="min-height: 600px"><!-- eases the scroll jerk on small searches -->
+			<div style="min-height: 600px" class="col-xs-12"><!-- eases the scroll jerk on small searches -->
 				<table class="table table-striped">
 					<thead>
 						<tr>
