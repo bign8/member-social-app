@@ -280,42 +280,43 @@
 						</select>
 				</div>
 			</div>
+			<div style="min-height: 600px"><!-- eases the scroll jerk on small searches -->
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Contact</th>
+							<th style="width:75%" class="hidden-xs">
+								<small class="pull-right text-right" style="font-weight:normal" data-ng-bind="total_rows()"></small>
+								Bio
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="user in (filtered_users = (users | filter:search_str)) | orderBy:field:sort_order | pagination:page:limit">
+							<td>
+								<div class="center-cropped pull-left img-rounded">
+									<img data-ng-src="img/{{user.Last}}, {{user.First}}.jpg" class="img-rounded" height="100px" 
+										data-ng-attr-title="{{user.First}} {{user.Last}}"
+										data-ng-attr-alt="{{user.First}} {{user.Last}}" />
+								</div>
+								<strong>
+									<span data-ng-bind="user.First">John</span>&nbsp;
+									<span data-ng-bind="user.Last">Doe</span>
+								</strong><br/>
+								<small data-ng-bind="user.TITLE">Intern</small><br/>
+								<span class="text-muted">
+									<span data-ng-bind="user.COMPANY">Temporary INC.</span><br/>
+									<span data-ng-bind="user.CITY">Two Dot</span>,&nbsp;<span data-ng-bind="user.STATE">MT</span>
+								</span>
+							</td>
+							<td data-ng-bind="user.Bio" class="hidden-xs">was an amazing ...</td>
+						</tr>
+					</tbody>
+				</table>
 
-			<table class="table table-striped">
-				<thead>
-					<tr>
-						<th>Contact</th>
-						<th style="width:75%" class="hidden-xs">
-							<small class="pull-right text-right" style="font-weight:normal" data-ng-bind="total_rows()"></small>
-							Bio
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="user in (filtered_users = (users | filter:search_str)) | orderBy:field:sort_order | pagination:page:limit">
-						<td>
-							<div class="center-cropped pull-left img-rounded">
-								<img data-ng-src="img/{{user.Last}}, {{user.First}}.jpg" class="img-rounded" height="100px" 
-									data-ng-attr-title="{{user.First}} {{user.Last}}"
-									data-ng-attr-alt="{{user.First}} {{user.Last}}" />
-							</div>
-							<strong>
-								<span data-ng-bind="user.First">John</span>&nbsp;
-								<span data-ng-bind="user.Last">Doe</span>
-							</strong><br/>
-							<small data-ng-bind="user.TITLE">Intern</small><br/>
-							<span class="text-muted">
-								<span data-ng-bind="user.COMPANY">Temporary INC.</span><br/>
-								<span data-ng-bind="user.CITY">Two Dot</span>,&nbsp;<span data-ng-bind="user.STATE">MT</span>
-							</span>
-						</td>
-						<td data-ng-bind="user.Bio" class="hidden-xs">was an amazing ...</td>
-					</tr>
-				</tbody>
-			</table>
-
-			<div class="text-center" data-ng-show="pages() !== 1"><!-- pager -->
-				<pagination num-pages="pages()" current-page="page" max-show="5"></pagination>
+				<div class="text-center" data-ng-show="pages() !== 1"><!-- pager -->
+					<pagination num-pages="pages()" current-page="page" max-show="5"></pagination>
+				</div>
 			</div>
 		</div>
 	</div>
