@@ -6,9 +6,31 @@ controller('search', ['$scope', '$http', function ($scope, $http) {
 	$scope.users = $scope.filtered_users = [];
 	$http.get('search.php').then(function (res) {
 		$scope.users = res.data;
+
+		var imgQueue = [];
 		angular.forEach($scope.users, function (value) {
 			value.Bio = value.First + /*' ' + value.Last +*/ ' ' + value.Bio;
+			imgQueue.push(value);
 		});
+
+		// Image queue Processor
+		(function ( queue ) {
+			var image = new Image(), user;
+			var queue_handler = function () {
+				if (queue.length) {
+					user = queue.shift();
+					image.src = 'img/' + user.Last + ', ' + user.First + '.jpg';
+				}
+			};
+			image.onload = queue_handler;
+			image.onerror = function (e) {
+				console.log('Image Frefetch Error');
+				console.log(e);
+				queue_handler();
+			};
+			queue_handler();
+		})( imgQueue );
+		
 	});
 
 	// Searching

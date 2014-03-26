@@ -29,12 +29,11 @@
 						<li><a href="#about">About</a></li>
 						<li><a href="#faq">FAQ</a></li>
 						<li><a href="#contacts">Contacts</a></li>
-						<li><a href="http://ela.upstreamacademy.com/" target="blank">Progress Tracker</a></li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tools <b class="caret"></b></a>
 							<ul class="dropdown-menu">
+								<li><a href="http://ela.upstreamacademy.com/" target="blank">Progress Tracker</a></li>
 								<li><a href="#">Project Samples</a></li>
-								<li><a href="#">More Tools...</a></li>
 								<li class="divider"></li>
 								<li class="dropdown-header">Guides</li>
 								<li><a href="#">Hints + Tips</a></li>
