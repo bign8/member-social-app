@@ -3,7 +3,7 @@
 html, body { height: 100%; } /* The html and body elements cannot have any padding or margin. */
 #wrap { /* Wrapper for page content to push down footer */
 	min-height: 100%;
-	height: auto !important;
+	/*height: auto !important;*/
 	height: 100%;
 	margin: 0 auto -60px; /* Negative indent footer by its height */
 	padding: 0 0 60px; /* Pad bottom by footer height */
@@ -17,7 +17,10 @@ html, body { height: 100%; } /* The html and body elements cannot have any paddi
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
-#wrap > .container { padding: 60px 15px 0; }
+#wrap > .container {
+	padding: 60px 15px 0;
+	min-height: 100%;
+}
 .container .credit { margin: 20px 0; }
 #footer > .container { padding-left: 15px; padding-right: 15px; }
 code { font-size: 80%; }

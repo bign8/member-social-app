@@ -1,0 +1,18 @@
+<div class="modal-header">
+	<h2>{{person.first}} {{person.last}} <small>{{person.title}}</small></h2>
+</div>
+<div class="modal-body">
+	<div class="row">
+		<div class="col-xs-4" style="padding-bottom:1em">
+			<img ng-src="img-full/{{person.last}}, {{person.first}}.jpg" class="img-rounded img-responsive center-block" data-ng-attr-title="{{person.first}} {{person.last}}" />
+		</div>
+		<div class="col-xs-8">
+			<p data-ng-bind="person.bio"></p>
+		</div>
+	</div>
+	<textarea ng-model="person.note" class="form-control" rows="10" style="margin-bottom:-20px"></textarea>
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" ng-click="ok()">OK</button>
+	<button class="btn btn-warning pull-left" ng-click="cancel()">Cancel</button>
+</div>
