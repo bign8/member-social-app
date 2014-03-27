@@ -1,5 +1,23 @@
 <?php
-	$auth = !isset($_REQUEST['noauth']);
+	session_start();
+	if (isset($_POST['login'])) {
+		if ($_POST['user'] == 'john' && $_POST['pass'] == 'doe') {
+			$_SESSION['user'] = array(
+				'userID' => -1,
+				'first' => 'John',
+				'last' => 'Doe',
+				'company' => 'Don\'t care',
+				'title' => 'Manager',
+				'city' => 'Two Dot',
+				'state' => 'MT',
+				'bio' => 'Something...'
+			);
+		}
+	} elseif (isset($_REQUEST['logout'])) {
+		unset( $_SESSION['user'] );
+		die(header('Location: index.php'));
+	}
+	$auth = isset( $_SESSION['user'] );
 ?>
 <!doctype html>
 <html lang="en">
@@ -49,10 +67,11 @@
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo "John Doe"; ?> <b class="caret"></b></a>
 								<ul class="dropdown-menu">
+									<li><a href="#">Your Profile</a></li>
 									<li><a href="#">Your Conference</a></li>
 									<li><a href="#">Your Calendar</a></li>
 									<li><a href="#">Your Workbook</a></li>
-									<li><a href="#">Logout</a></li>
+									<li><a href="index.php?logout">Logout</a></li>
 								</ul>
 							</li>
 						<?php else: ?>
@@ -332,16 +351,16 @@
 				</div>
 				<div class="col-sm-6 col-sm-offset-3">
 					<div class="well">
-						<form role="form" action="index.php">
+						<form role="form" action="index.php" method="post">
 							<div class="form-group">
 								<label for="exampleInputEmail1">Email address</label>
-								<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+								<input type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter email" name="user">
 							</div>
 							<div class="form-group">
 								<label for="exampleInputPassword1">Password</label>
-								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="pass">
 							</div>
-							<button type="submit" class="btn btn-primary">Login</button>
+							<button type="submit" class="btn btn-primary" name="login">Login</button>
 						</form>
 					</div>
 				</div>
@@ -349,7 +368,7 @@
 		<?php endif; ?>
 	</div><!-- ./wrap -->
 
-	<div id="footer">
+	<div id="footer" class="navbar navbar-default">
 		<div class="container">
 			<p class="pull-right social">
 				<a href="http://www.linkedin.com/groups?gid=4403897" target="blank">
