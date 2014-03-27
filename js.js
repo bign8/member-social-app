@@ -1,12 +1,16 @@
+"use strict";
+
 // jQuery soft scroll
 jQuery.fn.scroll_top = function() {
-	jQuery('html, body').animate({
+	if ( this.offset() ) jQuery('html, body').animate({
 		scrollTop: parseInt( this.offset().top, 10 )
 	}, 500);
 };
 jQuery('ul.nav a,a.navbar-brand').click( function (e){
-	if (e.target.hash) jQuery( e.target.hash ).scroll_top();
-	e.preventDefault();
+	if ( e.target.hash ) {
+		jQuery( e.target.hash ).scroll_top();
+		e.preventDefault();
+	}
 });
 
 // angular application
@@ -103,8 +107,8 @@ directive('pagination', function () {
 
 			// thanks: https://github.com/angular-ui/bootstrap/blob/master/src/pagination/pagination.js#L134
 			var trim_pager = function () {
-				startPage = Math.max($scope.currentPage - Math.floor($scope.maxShow/2), 1);
-				endPage   = Math.min(startPage + $scope.maxShow - 1, $scope.numPages);
+				var startPage = Math.max($scope.currentPage - Math.floor($scope.maxShow/2), 1);
+				var endPage   = Math.min(startPage + $scope.maxShow - 1, $scope.numPages);
 				if (endPage >= $scope.numPages) startPage = endPage - $scope.maxShow + 1; // adjust if necessary
 				$scope.print_pages = $scope.pages.slice(startPage-1, endPage);
 			};
