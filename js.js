@@ -90,6 +90,7 @@ directive('textAutoScale', function () {
 				e.target.style.height = "1px";
     			e.target.style.height = (25+e.target.scrollHeight)+"px";
 			});
+			scope.$watch(function () { return element.is(':visible'); }, function () { element.keyup(); });
 		}
 	}
 });
