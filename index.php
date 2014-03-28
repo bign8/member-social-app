@@ -13,9 +13,10 @@
 				'bio' => 'Something...'
 			);
 		}
+		die(header('Location: index.php')); // lose post request
 	} elseif (isset($_REQUEST['logout'])) {
 		unset( $_SESSION['user'] );
-		die(header('Location: index.php'));
+		die(header('Location: index.php')); // lose query string
 	}
 	$auth = isset( $_SESSION['user'] );
 ?>
@@ -98,7 +99,7 @@
 		<?php include('frame/hints.frame.html'); ?>
 
 		<?php include('frame/desc.frame.html'); ?>
-		
+
 		<?php if (!$auth) include('frame/login.frame.html'); ?>
 
 		<div class="container" style="min-height:0"></div><!-- same as a push -->
