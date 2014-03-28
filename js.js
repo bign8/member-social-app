@@ -1,5 +1,12 @@
 "use strict";
 
+var app = {
+	textareaAdjust: function (o) {
+		o.style.height = "1px";
+    	o.style.height = (25+o.scrollHeight)+"px";
+	}
+};
+
 // jQuery soft scroll
 jQuery.fn.scroll_top = function (cb) {
 	if ( this.offset() ) jQuery('html, body').animate({
@@ -82,14 +89,13 @@ controller('search', ['$scope', '$http', '$modal', function ($scope, $http, $mod
 				$scope.cancel = function () { $modalInstance.dismiss('cancel'); };
 			}],
 			resolve: {
-				person: function () { return user; }
-			}
+				person: function () { return angular.copy(user); }
+			},
+			windowClass: 'person-notes'
 		});
 		instance.result.then(function (person) {
-			console.log(person);
-		}, function () {
-			console.log('killed');
-		})
+			angular.extend(user, person);
+		});
 	};
 }]).
 
