@@ -12,8 +12,11 @@
 				'state' => 'MT',
 				'bio' => 'Something...'
 			);
+			die(header('Location: index.php')); // lose post request
+		} else {
+			// show login error
 		}
-		die(header('Location: index.php')); // lose post request
+		
 	} elseif (isset($_REQUEST['logout'])) {
 		unset( $_SESSION['user'] );
 		die(header('Location: index.php')); // lose query string
