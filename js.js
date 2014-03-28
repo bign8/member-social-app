@@ -1,12 +1,5 @@
 "use strict";
 
-var app = {
-	textareaAdjust: function (o) {
-		o.style.height = "1px";
-    	o.style.height = (25+o.scrollHeight)+"px";
-	}
-};
-
 // jQuery soft scroll
 jQuery.fn.scroll_top = function (cb) {
 	if ( this.offset() ) jQuery('html, body').animate({
@@ -87,4 +80,16 @@ filter('pagination', function () {
 		var start = (selectedPage-1) * pageSize;
 		return inputArray.slice(start, start + pageSize);
 	};
+}).
+
+directive('textAutoScale', function () {
+	return {
+		restrict: 'C',
+		link: function(scope, element, attrs) {
+			element.on('keyup', function (e) {
+				e.target.style.height = "1px";
+    			e.target.style.height = (25+e.target.scrollHeight)+"px";
+			});
+		}
+	}
 });

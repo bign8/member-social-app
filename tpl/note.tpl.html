@@ -4,13 +4,16 @@
 <div class="modal-body">
 	<div class="row">
 		<div class="col-xs-4 image">
-			<img ng-src="img-full/{{person.last}}, {{person.first}}.jpg" class="img-rounded img-responsive center-block" data-ng-attr-title="{{person.first}} {{person.last}}" />
+			<img 
+				ng-src="img-full/{{person.last}}, {{person.first}}.jpg"
+				class="img-rounded img-responsive center-block"
+				ng-attr-title="{{person.first}} {{person.last}}" />
 		</div>
 		<div class="col-xs-8">
 			<p data-ng-bind="person.bio"></p>
 		</div>
 	</div>
-	<textarea ng-model="person.note" class="form-control" placeholder="Notes..." onkeyup="app.textareaAdjust(this)"></textarea>
+	<textarea ng-model="person.note" class="form-control text-auto-scale" placeholder="Notes..." ></textarea>
 </div>
 <div class="modal-footer">
 	<button class="btn btn-primary btn-sm" ng-click="ok()"><i class="glyphicon glyphicon-floppy-disk"></i> &nbsp;Save</button>
