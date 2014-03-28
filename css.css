@@ -49,3 +49,28 @@ img.pull-right { padding: 0; margin: 0 0 1em 1em; }
 	line-height: 0;
 	font-size: 30px;
 }
+
+/* Person-Notes dialog class */
+.person-notes .modal-header { padding-bottom: 5px; }
+.person-notes .modal-header h2 { margin: 0; }
+.person-notes .modal-body { padding-bottom: 0; }
+.person-notes .modal-body .image { padding-bottom: 1em; }
+.person-notes .modal-body textarea {
+	background-color: #fff; 
+	/*background-image: 
+		-webkit-linear-gradient(90deg, transparent 19px, #abced4 19px, #abced4 21px, transparent 21px), 
+		-webkit-linear-gradient(#eee .1em, transparent .1em);
+	background-image: 
+		-moz-linear-gradient(90deg, transparent 19px, #abced4 19px, #abced4 21px, transparent 21px), 
+		-moz-linear-gradient(#eee .1em, transparent .1em);
+	background-image: 
+		-o-linear-gradient(90deg, transparent 19px, #abced4 19px, #abced4 21px, transparent 21px), 
+		-o-linear-gradient(#eee .1em, transparent .1em);*/
+	background-image: 
+		linear-gradient(90deg, transparent 19px, #abced4 19px, #abced4 21px, transparent 21px), 
+		linear-gradient(#eee .1em, transparent .1em);
+	background-size: 100% 1.42857143em;
+	padding-left: 25px;
+	resize: none;
+}
+.person-notes .modal-footer { padding: 10px; }

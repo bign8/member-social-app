@@ -3,16 +3,16 @@
 </div>
 <div class="modal-body">
 	<div class="row">
-		<div class="col-xs-4" style="padding-bottom:1em">
+		<div class="col-xs-4 image">
 			<img ng-src="img-full/{{person.last}}, {{person.first}}.jpg" class="img-rounded img-responsive center-block" data-ng-attr-title="{{person.first}} {{person.last}}" />
 		</div>
 		<div class="col-xs-8">
 			<p data-ng-bind="person.bio"></p>
 		</div>
 	</div>
-	<textarea ng-model="person.note" class="form-control" rows="10" style="margin-bottom:-20px"></textarea>
+	<textarea ng-model="person.note" class="form-control" placeholder="Notes..." onkeyup="app.textareaAdjust(this)"></textarea>
 </div>
 <div class="modal-footer">
-	<button class="btn btn-primary" ng-click="ok()">OK</button>
-	<button class="btn btn-warning pull-left" ng-click="cancel()">Cancel</button>
+	<button class="btn btn-primary btn-sm" ng-click="ok()"><i class="glyphicon glyphicon-floppy-disk"></i> &nbsp;Save</button>
+	<button class="btn btn-warning pull-left btn-sm" ng-click="cancel()">Cancel</button>
 </div>
