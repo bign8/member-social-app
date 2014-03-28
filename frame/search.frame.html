@@ -78,7 +78,18 @@
 			</table>
 
 			<div class="text-center" data-ng-show="pages() !== 1"><!-- pager -->
-				<span data-n8-pagination data-num-pages="pages()" data-current-page="page" data-max-show="5"></span>
+				<span 
+					data-pagination
+					data-total-items="filtered_users.length"
+					data-items-per-page="limit"
+					data-page="page"
+					data-max-size="5"
+					data-boundary-links="true"
+					data-previous-text="&lsaquo;"
+					data-next-text="&rsaquo;"
+					data-first-text="&laquo;"
+					data-last-text="&raquo;">
+				</span>
 			</div>
 		</div>
 	</div>
