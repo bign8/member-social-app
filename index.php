@@ -3,7 +3,7 @@
 	if (isset($_POST['login'])) {
 		if ($_POST['user'] == 'john' && $_POST['pass'] == 'doe') {
 			$_SESSION['user'] = array(
-				'userID' => -1,
+				'userID' => 'B0091656878&C`G)9Tod',
 				'first' => 'John',
 				'last' => 'Doe',
 				'company' => 'Don\'t care',
