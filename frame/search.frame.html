@@ -77,7 +77,7 @@
 				</tbody>
 			</table>
 
-			<div class="text-center" data-ng-show="pages() !== 1"><!-- pager -->
+			<div class="text-center" data-ng-show="num_pages !== 1"><!-- pager -->
 				<span 
 					data-pagination
 					data-total-items="filtered_users.length"
@@ -88,7 +88,8 @@
 					data-previous-text="&lsaquo;"
 					data-next-text="&rsaquo;"
 					data-first-text="&laquo;"
-					data-last-text="&raquo;">
+					data-last-text="&raquo;"
+					data-num-pages="num_pages">
 				</span>
 			</div>
 		</div>
