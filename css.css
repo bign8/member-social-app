@@ -68,7 +68,7 @@ img.pull-right { padding: 0; margin: 0 0 1em 1em; }
 		-o-linear-gradient(#eee .1em, transparent .1em);*/
 	background-image: 
 		linear-gradient(90deg, transparent 19px, #abced4 19px, #abced4 21px, transparent 21px), 
-		linear-gradient(#eee .1em, transparent .1em);
+		linear-gradient(transparent .2em, #eee .2em, #eee .3em, transparent .3em);
 	background-size: 100% 1.42857143em;
 	padding-left: 25px;
 	resize: none;

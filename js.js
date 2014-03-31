@@ -71,6 +71,9 @@ controller('search', ['$scope', '$http', '$modal', function ($scope, $http, $mod
 		});
 		instance.result.then(function (person) {
 			angular.extend(user, person);
+			$http.post('api.php?action=note', person).then(function (res) {
+				angular.extend(user, res.data);
+			});
 		});
 	};
 }]).
