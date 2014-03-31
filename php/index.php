@@ -13,35 +13,37 @@ require_once(__dir__ . DIRECTORY_SEPARATOR . 'secure_pass.php');
 * ELA Main class
 */
 class ELA {
+	public $status;
 	protected $db;
 
 	function __construct() {
 		$this->db = new PDO('sqlite:db.sqlite3');
+		$this->status = array();
 	}
 
-	public function login() {
+	public function login( $email, $password ) {
 		$sth  = $this->db->prepare("SELECT * FROM participants WHERE email=?;");
-		$pass = $sth->execute(array( $_POST['user'] ));
+		$pass = $sth->execute(array( $email ));
 		$user = $sth->fetch( PDO::FETCH_ASSOC );
-		$pass = $pass ? validate_password( $_POST['pass'], $user['pass'] ) : false ;
+		$pass = $pass ? validate_password( $password, $user['pass'] ) : false ;
 
 		if ($pass) {
 			unset($user['pass']);
 			$_SESSION['user'] = $user;
-			die(header('Location: index.php')); // lose post request
-		} else {
-			// show login error
 		}
+		return $pass;
 	}
 	public function logout() {
 		unset( $_SESSION['user'] );
-		die(header('Location: index.php')); // lose query string
 	}
 }
 
 $app = new ELA();
 if (isset($_POST['login'])) {
-	$app->login();
+	$result = $app->login( $_POST['user'], $_POST['pass'] );
+	if ($result) die(header('Location: index.php')); // lose post request
+	array_push($app->status, 'login-error');
 } elseif (isset($_GET['logout'])) {
 	$app->logout();
+	die(header('Location: index.php')); // lose query string
 }
