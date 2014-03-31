@@ -1,18 +1,12 @@
 <?php
-
-ob_start("ob_gzhandler"); // gzip if possible
-
-// For Debug
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+require_once(__dir__ . DIRECTORY_SEPARATOR . 'php' . DIRECTORY_SEPARATOR . 'index.php');
 
 /**
 * Class Definition: Handles the generic processes for ELA-APP
 */
-class Search_ELA {
+class Search_ELA extends ELA {
 	function __construct() {
-		session_start();
-		$this->db   = new PDO('sqlite:db.sqlite3');
+		parent::__construct();
 		$this->data = json_decode(file_get_contents("php://input"));
 		$this->user = (object) $_SESSION['user'];
 	}
@@ -20,7 +14,7 @@ class Search_ELA {
 	public function search() {
 		// $sth  = $db->query("SELECT userID,first,last,company,title,city,state,bio FROM participants;");
 		$sth  = $this->db->prepare("SELECT * FROM participants p LEFT JOIN (SELECT * FROM note WHERE srcID=?) n ON p.accountno = n.destID;");
-		$sth->execute( array( $this->user->userID ) );
+		$sth->execute( array( $this->user->accountno ) );
 		return $sth->fetchAll( PDO::FETCH_ASSOC );
 	}
 
@@ -28,7 +22,7 @@ class Search_ELA {
 		$pass = false;
 		if ( is_null($this->data->noteID) ) {
 			$sth = $this->db->prepare("INSERT INTO note (srcID, destID, note, \"when\") VALUES (?,?,?,CURRENT_TIMESTAMP);");
-			$pass = $sth->execute(array( $this->user->userID, $this->data->accountno, $this->data->note ));
+			$pass = $sth->execute(array( $this->user->accountno, $this->data->accountno, $this->data->note ));
 			$this->data->noteID = $this->db->lastInsertId();
 		} else {
 			$sth = $this->db->prepare("UPDATE note SET note=?, \"when\"=CURRENT_TIMESTAMP WHERE noteID=?;");

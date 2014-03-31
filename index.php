@@ -1,26 +1,5 @@
 <?php
-	session_start();
-	if (isset($_POST['login'])) {
-		if ($_POST['user'] == 'john' && $_POST['pass'] == 'doe') {
-			$_SESSION['user'] = array(
-				'userID' => 'B0091656878&C`G)9Tod',
-				'first' => 'John',
-				'last' => 'Doe',
-				'company' => 'Don\'t care',
-				'title' => 'Manager',
-				'city' => 'Two Dot',
-				'state' => 'MT',
-				'bio' => 'Something...'
-			);
-			die(header('Location: index.php')); // lose post request
-		} else {
-			// show login error
-		}
-		
-	} elseif (isset($_REQUEST['logout'])) {
-		unset( $_SESSION['user'] );
-		die(header('Location: index.php')); // lose query string
-	}
+	require_once(__dir__ . DIRECTORY_SEPARATOR . 'php' . DIRECTORY_SEPARATOR . 'index.php');
 	$auth = isset( $_SESSION['user'] );
 ?>
 <!doctype html>
