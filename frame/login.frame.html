@@ -8,14 +8,22 @@
 	<div class="row">
 		<div class="col-sm-6 col-sm-offset-1">
 			<div class="well">
-				<form role="form" action="index.php" method="post">
+				<form role="form" action="index.php#login" method="post">
+					<?php if (in_array('login-error', $app->status)): ?>
+						<div class="alert alert-danger">
+							<strong>Invalid Credentials</strong> 
+							Change a few things up and try authenticating again.
+						</div>
+					<?php endif; ?>
 					<div class="form-group">
 						<label for="inputUser">Email address</label>
-						<input type="text" class="form-control" id="inputUser" placeholder="Enter email" name="user">
+						<input type="text" class="form-control" id="inputUser" placeholder="Enter email" name="user" 
+							value="<?php if (isset($_REQUEST['user'])) echo $_REQUEST['user']; ?>">
 					</div>
 					<div class="form-group">
 						<label for="inputPassword">Password</label>
-						<input type="password" class="form-control" id="inputPassword" placeholder="Password" name="pass">
+						<input type="password" class="form-control" id="inputPassword" placeholder="Password" name="pass"
+							value="<?php if (isset($_REQUEST['pass'])) echo $_REQUEST['pass']; ?>">
 					</div>
 					<button type="submit" class="btn btn-primary" name="login">Login</button>
 				</form>
