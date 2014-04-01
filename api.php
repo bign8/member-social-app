@@ -13,7 +13,7 @@ class Search_ELA extends ELA {
 
 	public function search() {
 		// $sth  = $db->query("SELECT userID,first,last,company,title,city,state,bio FROM participants;");
-		$sth  = $this->db->prepare("SELECT * FROM participants p LEFT JOIN (SELECT * FROM note WHERE srcID=?) n ON p.accountno = n.destID;");
+		$sth  = $this->db->prepare("SELECT * FROM user p LEFT JOIN (SELECT * FROM note WHERE srcID=?) n ON p.accountno = n.destID;");
 		$sth->execute( array( $this->user->accountno ) );
 		return $sth->fetchAll( PDO::FETCH_ASSOC );
 	}

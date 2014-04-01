@@ -22,7 +22,7 @@ class ELA {
 	}
 
 	public function login( $email, $password ) {
-		$sth  = $this->db->prepare("SELECT * FROM participants WHERE email=?;");
+		$sth  = $this->db->prepare("SELECT * FROM user WHERE email=?;");
 		$pass = $sth->execute(array( $email ));
 		$user = $sth->fetch( PDO::FETCH_ASSOC );
 		$pass = $pass ? validate_password( $password, $user['pass'] ) : false ;
