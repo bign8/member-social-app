@@ -84,7 +84,7 @@
 
 		<?php if (!$auth) include('frame/login.frame.html'); ?>
 
-		<?php include('frame/profile.frame.php'); ?>
+		<?php if ($auth) include('frame/profile.frame.php'); ?>
 
 		<div class="container" style="min-height:0"></div><!-- same as a push -->
 	</div><!-- ./wrap -->

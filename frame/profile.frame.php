@@ -6,13 +6,13 @@
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac eleifend nisl. Mauris vitae tincidunt turpis, quis facilisis orci. Maecenas elementum sapien vitae libero semper commodo. Quisque tincidunt, dui vitae laoreet sollicitudin, sem tellus interdum odio, eu ornare tellus tellus ac tortor. Nulla laoreet urna ligula, ut ultrices dui ultricies et. Proin in viverra tellus. Duis vel sem quis neque molestie vehicula id eu mauris. Mauris eleifend ut est at luctus. Sed nec ligula a lectus ultricies bibendum viverra vitae ante. Suspendisse fringilla turpis nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum nisl urna, non dictum dolor facilisis eu.
 	</p>
 	<div class="well">
-		<form role="form" action="index.php#profile" method="post" class="form-horizontal clearfix">
+		<form role="form" action="index.php#profile" method="post" class="form-horizontal clearfix" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-sm-2">
 					<img class="img-responsive img-rounded" style="margin-bottom: 10px"
 						src="img-full/<?php echo $_SESSION['user']['last'] . ',%20' . $_SESSION['user']['first']; ?>.jpg">
-					<input id="user_image" type="file" class="hidden" accept="image/*" />
-					<input type="button" class="btn btn-sm btn-default col-sm-12" value="Choose" onclick="user_image.click()" />
+					<input id="user_image" type="file" class="form-control" accept="image/*" name="image" />
+					<!-- <input type="button" class="btn btn-sm btn-default col-sm-12" value="Choose" onclick="user_image.click()" /> -->
 				</div>
 
 				<div class="col-sm-4">
