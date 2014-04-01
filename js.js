@@ -10,6 +10,7 @@ jQuery('ul.nav a,a.navbar-brand').click( function (e){
 	if ( e.target.hash ) {
 		jQuery( e.target.hash ).scroll_top(function() {
 			if (e.target.hash == '#login') $('#inputUser').focus();
+			document.location.hash = e.target.hash;
 		});
 		e.preventDefault();
 	}
