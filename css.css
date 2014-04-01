@@ -71,6 +71,9 @@ img.pull-right { padding: 0; margin: 0 0 1em 1em; }
 		linear-gradient(transparent .2em, #eee .2em, #eee .3em, transparent .3em);
 	background-size: 100% 1.42857143em;
 	padding-left: 25px;
-	resize: none;
 }
 .person-notes .modal-footer { padding: 10px; }
+
+textarea.text-auto-scale {
+	resize: none;
+}
