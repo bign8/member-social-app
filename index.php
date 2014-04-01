@@ -52,7 +52,7 @@
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#">Your Profile</a></li>
+								<li><a href="#profile">Your Profile</a></li>
 								<li><a href="#">Your Conference</a></li>
 								<li><a href="#">Your Calendar</a></li>
 								<li><a href="#">Your Workbook</a></li>
@@ -83,6 +83,8 @@
 		<?php include('frame/desc.frame.html'); ?>
 
 		<?php if (!$auth) include('frame/login.frame.html'); ?>
+
+		<?php include('frame/profile.frame.php'); ?>
 
 		<div class="container" style="min-height:0"></div><!-- same as a push -->
 	</div><!-- ./wrap -->
