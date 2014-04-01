@@ -11,17 +11,17 @@
 				<div class="col-sm-2">
 					<img class="img-responsive img-rounded" style="margin-bottom: 10px"
 						src="img-full/<?php echo $_SESSION['user']['last'] . ',%20' . $_SESSION['user']['first']; ?>.jpg">
-					<input id="user_image" type="file" class="ng-hide" accept="image/*" />
-					<input type="button" class="btn btn-sm btn-default col-sm-12" value="Upload" onclick="user_image.click()" />
+					<input id="user_image" type="file" class="hidden" accept="image/*" />
+					<input type="button" class="btn btn-sm btn-default col-sm-12" value="Choose" onclick="user_image.click()" />
 				</div>
 
 				<div class="col-sm-4">
-					<!--<?php if (in_array('login-error', $app->status)): ?>
+					<?php if (in_array('profile-error', $app->status)): ?>
 						<div class="alert alert-danger">
-							<strong>Invalid Credentials</strong> 
-							Change a few things up and try authenticating again.
+							<strong>Something went wrong</strong> 
+							and we were unable to save your changes. 
 						</div>
-					<?php endif; ?>-->
+					<?php endif; ?>
 					<div class="form-group">
 						<label for="user_first" class="col-sm-3 control-label">First&nbsp;Name</label>
 						<div class="col-sm-9">
@@ -65,14 +65,12 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="col-sm-6">
 					<label for="user_bio">Biography</label>
-					<textarea id="user_bio" class="form-control text-auto-scale" placeholder="Bio..." rows="10"><?php echo $_SESSION['user']['bio']; ?></textarea>
+					<textarea id="user_bio" class="form-control text-auto-scale" placeholder="Bio..." rows="10" name="bio"><?php echo $_SESSION['user']['bio']; ?></textarea>
 					<p class="help-block">* Your first name is automatically prepended when printing</p>
 				</div>
 			</div>
-
 			<button type="submit" class="btn btn-primary pull-right" name="profile">Save Changes</button>
 			<button type="reset" class="btn btn-default" name="reset">Reset</button>
 		</form>
