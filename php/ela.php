@@ -123,18 +123,24 @@ class ELA {
 	}
 
 	public function clean_files() {
-		set_time_limit(0);
-		echo '<pre>';
-		$base = __dir__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
-		$source = array_diff(scandir($base . 'img-orig'), array('..', '.'));
+		// set_time_limit(0);
+		// echo '<pre>';
+		// $base = __dir__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
+		// $source = array_diff(scandir($base . 'img-orig'), array('..', '.'));
 
-		foreach ($source as $key => $image) {
-			$resource =    imagecreatefromjpeg($base . 'img-orig' . DIRECTORY_SEPARATOR . $image);
-			$this->resize_crop_save($resource, $base . 'img-full' . DIRECTORY_SEPARATOR . $image, 200);
-			$this->resize_crop_save($resource, $base . 'img'      . DIRECTORY_SEPARATOR . $image, 100);
-			echo $key . "\n";
-			imagedestroy($resource);
-		}
+		// foreach ($source as $key => $image) {
+		// 	$resource =    imagecreatefromjpeg($base . 'img-orig' . DIRECTORY_SEPARATOR . $image);
+		// 	$this->resize_crop_save($resource, $base . 'img-full' . DIRECTORY_SEPARATOR . $image, 200);
+		// 	$this->resize_crop_save($resource, $base . 'img'      . DIRECTORY_SEPARATOR . $image, 100);
+		// 	echo $key . "\n";
+		// 	imagedestroy($resource);
+		// }
+	}
+
+	public function my_conference_info() {
+		$sth = $this->db->prepare("SELECT * FROM (SELECT * FROM attendee WHERE userID=?) a LEFT JOIN event e ON a.eventID=e.eventID LEFT JOIN year y ON a.yearID=y.yearID ORDER BY y.year DESC;");
+		$sth->execute(array( $_SESSION['user']['accountno'] ));
+		return $sth->fetchAll( PDO::FETCH_ASSOC );
 	}
 }
 
