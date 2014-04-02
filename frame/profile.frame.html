@@ -9,9 +9,13 @@
 		<form role="form" action="index.php#profile" method="post" class="form-horizontal clearfix" enctype="multipart/form-data">
 			<div class="row">
 				<div class="col-sm-2">
-					<img class="img-responsive img-rounded" style="margin-bottom: 10px"
-						src="img-full/<?php echo $_SESSION['user']['last'] . ',%20' . $_SESSION['user']['first']; ?>.jpg">
-					<input id="user_image" type="file" class="form-control" accept="image/*" name="image" />
+					<div class="img-loader">
+						<img id="actual_user_image" class="img-responsive img-rounded" style="margin-bottom: 10px"
+							src="img-full/<?php echo $_SESSION['user']['last'] . ',%20' . $_SESSION['user']['first']; ?>.jpg">
+						<img class="spinner" alt="..." src="data/img/spinner.gif" />
+					</div>
+					<input id="user_image" type="file" class="hide" accept="image/*" name="image" />
+					<input type="button" class="form-control btn btn-default" onclick="user_image.click()" value="Choose File" />
 					<?php if (in_array('image-type-error', $app->status)): ?>
 						<div class="alert alert-danger">
 							<strong>Invalid image type</strong> 

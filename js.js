@@ -16,6 +16,18 @@ jQuery('ul.nav a,a.navbar-brand').click( function (e){
 	}
 });
 
+jQuery('#user_image').change(function() {
+	if (this.files && this.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function (e) {
+			$('#actual_user_image').attr('src', e.target.result);
+			$('.img-loader .spinner').hide();
+		};
+		$('.img-loader .spinner').show();
+		reader.readAsDataURL(this.files[0]);
+	}
+});
+
 // angular application
 angular.module('ela', [
 	'ui.bootstrap'
