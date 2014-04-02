@@ -51,10 +51,8 @@
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
+								<li><a href="#conference">Conference</a></li>
 								<li><a href="#profile">Profile</a></li>
-								<li><a href="#">Your Conference</a></li>
-								<li><a href="#">Your Calendar</a></li>
-								<li><a href="#">Your Workbook</a></li>
 								<li><a href="index.php?action=logout">Logout</a></li>
 							</ul>
 						</li>
@@ -83,6 +81,7 @@
 
 		<?php if (!$auth) $ela_include('frame/login.frame.html'); ?>
 
+		<?php if ($auth) $ela_include('frame/conference.frame.html'); ?>
 
 		<?php if ($auth) $ela_include('frame/profile.frame.html'); ?>
 

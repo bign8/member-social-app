@@ -1,0 +1,31 @@
+<?php
+	$conferences = $app->my_conference_info();
+	$class = 'col-sm-' . (12 / sizeof($conferences));
+?>
+
+<div class="container" id="conference">
+	<div class="page-header">
+		<h1>Conference <small><?php echo $_SESSION['user']['first'] . ' ' . $_SESSION['user']['last']; ?></small></h1>
+	</div>
+	<p class="lead">
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ac eleifend nisl. Mauris vitae tincidunt turpis, quis facilisis orci. Maecenas elementum sapien vitae libero semper commodo. Quisque tincidunt, dui vitae laoreet sollicitudin, sem tellus interdum odio, eu ornare tellus tellus ac tortor. Nulla laoreet urna ligula, ut ultrices dui ultricies et. Proin in viverra tellus. Duis vel sem quis neque molestie vehicula id eu mauris. Mauris eleifend ut est at luctus. Sed nec ligula a lectus ultricies bibendum viverra vitae ante. Suspendisse fringilla turpis nisi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum nisl urna, non dictum dolor facilisis eu.
+	</p>
+	<div class="row">
+		<?php foreach ($conferences as $conference): ?>
+			<div class="<?php echo $class; ?>">
+				<div class="well">
+					<h2 style="margin-top:0">
+						Year #<?php echo $conference['year']; ?>
+						<small><?php echo $conference['name']; ?></small>
+					</h2>
+					<?php echo (is_null($conference['workbook'])) ? '' : '<a href="'. $conference['workbook'] .'">Workbook</a><br/>' ; ?>
+					<?php echo (is_null($conference['calendar'])) ? '' : '<a href="'. $conference['calendar'] .'">Calendar</a><br/>' ; ?>
+					<!-- <pre><?php print_r($conference); ?></pre> -->
+				</div>
+			</div>
+		<?php endforeach; ?>
+	</div>
+	<p>
+		In feugiat tincidunt tortor. Quisque cursus purus a justo egestas, id consectetur tellus vulputate. Quisque sed blandit nulla. Nunc fringilla quis lacus eget hendrerit. Etiam tincidunt metus at nisl scelerisque dapibus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus vestibulum mauris lacus, nec accumsan lectus adipiscing nec. Vestibulum convallis suscipit lectus vitae eleifend. Proin luctus pulvinar mi et elementum. Pellentesque luctus, metus quis elementum dictum, leo lorem posuere odio, vel accumsan tellus odio at risus. Proin tempus imperdiet quam nec vestibulum.
+	</p>
+</div>
