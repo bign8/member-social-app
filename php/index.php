@@ -28,3 +28,12 @@ switch ( isset($_REQUEST['action']) ? $_REQUEST['action'] : 'none' ) {
 		array_push($app->status, 'profile-error');
 		break;
 }
+
+// For perfect striped frames
+$ela_include = function($path) use ($app, &$dumb_counter) {
+	$dumb_counter++;
+	echo "<div class=\"color color-$dumb_counter\">";
+	require($path);
+	echo "</div>";
+	$dumb_counter %= 2;
+};

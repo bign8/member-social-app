@@ -67,25 +67,26 @@
 	</div>
 
 	<div id="wrap" data-ng-app="ela">
-		<?php include('frame/home.frame.html'); ?>
+		<?php $ela_include('frame/home.frame.html'); ?>
 
-		<?php include('frame/about.frame.html'); ?>
+		<?php $ela_include('frame/about.frame.html'); ?>
 
-		<?php include('frame/faq.frame.html'); ?>
+		<?php $ela_include('frame/faq.frame.html'); ?>
 
-		<?php if ($auth) include('frame/search.frame.html'); ?>
+		<?php if ($auth) $ela_include('frame/search.frame.html'); ?>
 
-		<?php include('frame/samples.frame.html'); ?>
+		<?php $ela_include('frame/samples.frame.html'); ?>
 
-		<?php include('frame/hints.frame.html'); ?>
+		<?php $ela_include('frame/hints.frame.html'); ?>
 
-		<?php include('frame/desc.frame.html'); ?>
+		<?php $ela_include('frame/desc.frame.html'); ?>
 
-		<?php if (!$auth) include('frame/login.frame.html'); ?>
+		<?php if (!$auth) $ela_include('frame/login.frame.html'); ?>
 
-		<?php if ($auth) include('frame/profile.frame.html'); ?>
 
-		<div class="container" style="min-height:0"></div><!-- same as a push -->
+		<?php if ($auth) $ela_include('frame/profile.frame.html'); ?>
+
+		<div style="min-height:60px;height:60px"></div><!-- same as a push -->
 	</div><!-- ./wrap -->
 
 	<div id="footer" class="navbar navbar-default navbar-fixed-bottom">

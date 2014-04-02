@@ -16,6 +16,7 @@ jQuery('ul.nav a,a.navbar-brand').click( function (e){
 	}
 });
 
+// Image pre-loader : http://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded
 jQuery('#user_image').change(function() {
 	if (this.files && this.files[0]) {
 		var reader = new FileReader();
