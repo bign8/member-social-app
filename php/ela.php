@@ -9,7 +9,7 @@ class ELA {
 	protected $db;
 
 	function __construct() {
-		$this->db = new PDO('sqlite:db.sqlite3');
+		$this->db = new PDO('sqlite:' . __dir__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'db.sqlite3');
 		$this->status = array();
 	}
 
@@ -121,4 +121,21 @@ class ELA {
 		imagedestroy($img);
 		return $pass;
 	}
+
+	public function clean_files() {
+		set_time_limit(0);
+		echo '<pre>';
+		$base = __dir__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
+		$source = array_diff(scandir($base . 'img-orig'), array('..', '.'));
+
+		foreach ($source as $key => $image) {
+			$resource =    imagecreatefromjpeg($base . 'img-orig' . DIRECTORY_SEPARATOR . $image);
+			$this->resize_crop_save($resource, $base . 'img-full' . DIRECTORY_SEPARATOR . $image, 200);
+			$this->resize_crop_save($resource, $base . 'img'      . DIRECTORY_SEPARATOR . $image, 100);
+			echo $key . "\n";
+			imagedestroy($resource);
+		}
+	}
 }
+
+// if (isset($_REQUEST['cron'])) (new ELA())->clean_files();
