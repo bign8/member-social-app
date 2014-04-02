@@ -12,7 +12,12 @@
 					<img class="img-responsive img-rounded" style="margin-bottom: 10px"
 						src="img-full/<?php echo $_SESSION['user']['last'] . ',%20' . $_SESSION['user']['first']; ?>.jpg">
 					<input id="user_image" type="file" class="form-control" accept="image/*" name="image" />
-					<!-- <input type="button" class="btn btn-sm btn-default col-sm-12" value="Choose" onclick="user_image.click()" /> -->
+					<?php if (in_array('image-type-error', $app->status)): ?>
+						<div class="alert alert-danger">
+							<strong>Invalid image type</strong> 
+							We were unable to process your image.  Currntly we only accept PNGs, JPGs, and GIFs.
+						</div>
+					<?php endif; ?>
 				</div>
 
 				<div class="col-sm-4">
@@ -71,7 +76,7 @@
 					<p class="help-block">* Your first name is automatically prepended when printing</p>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary pull-right" name="profile">Save Changes</button>
+			<button type="submit" class="btn btn-primary pull-right" name="action" value="profile">Save Changes</button>
 			<button type="reset" class="btn btn-default" name="reset">Reset</button>
 		</form>
 	</div>
