@@ -47,16 +47,15 @@
 					<?php if ($auth): ?>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<?php echo isset($_SESSION['user']['first']) ? $_SESSION['user']['first'] : 'John'; ?> 
-								<?php echo isset($_SESSION['user']['last']) ? $_SESSION['user']['last'] : 'Doe'; ?>
+								<?php echo $_SESSION['user']['first'] . ' ' . $_SESSION['user']['last']; ?>
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#profile">Your Profile</a></li>
+								<li><a href="#profile">Profile</a></li>
 								<li><a href="#">Your Conference</a></li>
 								<li><a href="#">Your Calendar</a></li>
 								<li><a href="#">Your Workbook</a></li>
-								<li><a href="index.php?logout">Logout</a></li>
+								<li><a href="index.php?action=logout">Logout</a></li>
 							</ul>
 						</li>
 					<?php else: ?>
@@ -84,7 +83,7 @@
 
 		<?php if (!$auth) include('frame/login.frame.html'); ?>
 
-		<?php if ($auth) include('frame/profile.frame.php'); ?>
+		<?php if ($auth) include('frame/profile.frame.html'); ?>
 
 		<div class="container" style="min-height:0"></div><!-- same as a push -->
 	</div><!-- ./wrap -->
