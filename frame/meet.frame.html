@@ -1,7 +1,7 @@
 <div class="container" id="meet">
 
 	<div class="col-sm-4">
-		<img src="data/img/logo-black.png" alt="Emerging Leaders Academy" class="img-responsive thumbnail" style="padding:20px">
+		<img src="data/img/logo-color.png" alt="Emerging Leaders Academy" class="img-responsive thumbnail" style="padding:20px">
 	</div>
 
 	<div class="col-sm-8">
@@ -30,18 +30,10 @@
 		</div>
 
 		<div class="well clearfix">
-			<?php 
-				$request  = "http://www.kimonolabs.com/api/4xad9uwo?apikey=3d81ffa5911484983a0a11d64b931a48";
-				$response = file_get_contents($request);
-				$results  = json_decode($response, TRUE)['results']['collection1'];
-				$result   = $results[ array_rand($results) ];
-			?>
-			<blockquote>
-				<p><?php echo $result['quote']['text']; ?></p>
-				<footer>
-					<cite title="<?php echo $result['author']['text']; ?>"><?php echo $result['author']['text']; ?></cite>
-					(<a href="http://www.brainyquote.com/">source</a>)
-				</footer>
+			<blockquote style="margin-bottom:0">
+				<?php $random_quote = $app->random_quote(); ?>
+				<p><?php echo $random_quote['quote']; ?></p>
+				<footer><cite title="<?php echo $random_quote['author']; ?>"><?php echo $random_quote['author']; ?></cite></footer>
 			</blockquote>
 		</div>
 
