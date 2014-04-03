@@ -3,11 +3,9 @@
 // jQuery soft scroll
 jQuery.fn.scroll_top = function (cb) {
 	if ( this.offset() ) {
-		// http://stackoverflow.com/a/22629859/3220865
-		var distance = Math.abs( $(document.body).scrollTop() - this.offset().top ); 
 		jQuery('html, body').animate({
 			scrollTop: parseInt( this.offset().top, 10 )
-		}, distance || 500, cb);
+		}, 500, cb);
 	}
 };
 jQuery('ul.nav a,a.navbar-brand').click( function (e){
