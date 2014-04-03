@@ -32,7 +32,7 @@ jQuery('#user_image').change(function() {
 });
 jQuery('#profile_reset').click(function () {
 	document.profile.reset();
-	$('#actual_user_image').attr('src', 'img-full/' + $('#user_last').val() + ', ' + $('#user_first').val() + '.jpg');
+	$('#actual_user_image').attr('src', 'img/full/' + $('#user_last').val() + ', ' + $('#user_first').val() + '.jpg');
 });
 
 // angular application

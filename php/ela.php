@@ -36,7 +36,7 @@ class ELA {
 
 		// Upload photos
 		if ($pass) {
-			$start = __dir__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
+			$start = __dir__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR;
 			$old = DIRECTORY_SEPARATOR . ucfirst($old_data['last']) . ', ' . ucfirst($old_data['first']) . '.jpg';
 			$new = DIRECTORY_SEPARATOR . ucfirst($data['last']) . ', ' . ucfirst($data['first']) . '.jpg';
 			if (
@@ -45,9 +45,9 @@ class ELA {
 		}
 
 		// Rename photos with the new name
-		if ($pass) $pass = rename( $start . 'img' . $old, $start . 'img' . $new );
-		if ($pass) $pass = rename( $start . 'img-full' . $old, $start . 'img-full' . $new );
-		if ($pass) $pass = rename( $start . 'img-orig' . $old, $start . 'img-orig' . $new );
+		if ($pass) $pass = rename( $start . 'sml' . $old, $start . 'sml' . $new );
+		if ($pass) $pass = rename( $start . 'full' . $old, $start . 'full' . $new );
+		if ($pass) $pass = rename( $start . 'orig' . $old, $start . 'orig' . $new );
 
 		// Update settings
 		if ($pass) {
@@ -76,23 +76,23 @@ class ELA {
 		if (!$pass) array_push($this->status, 'image-type-error');
 
 		// Upload new file
-		if (file_exists($base . 'img-orig' . $name)) unlink($base . 'img-orig' . $name); // delete image
-		if ($pass) $pass = move_uploaded_file($image['tmp_name'], $base . 'img-orig' . $name);
+		if (file_exists($base . 'orig' . $name)) unlink($base . 'orig' . $name); // delete image
+		if ($pass) $pass = move_uploaded_file($image['tmp_name'], $base . 'orig' . $name);
 
 		// Get Image Data
 		if ($pass) {
-			list($width, $height, $mime) = getimagesize($base . 'img-orig' . $name);
+			list($width, $height, $mime) = getimagesize($base . 'orig' . $name);
 			switch ($mime) {
-				case IMAGETYPE_GIF:  $source = imagecreatefromgif( $base . 'img-orig' . $name); break;
-				case IMAGETYPE_PNG:  $source = imagecreatefrompng( $base . 'img-orig' . $name); break;
-				case IMAGETYPE_JPEG: $source = imagecreatefromjpeg($base . 'img-orig' . $name); break;
+				case IMAGETYPE_GIF:  $source = imagecreatefromgif( $base . 'orig' . $name); break;
+				case IMAGETYPE_PNG:  $source = imagecreatefrompng( $base . 'orig' . $name); break;
+				case IMAGETYPE_JPEG: $source = imagecreatefromjpeg($base . 'orig' . $name); break;
 				default: $pass = false;
 			}
 		}
 
 		// Resize + store images for web
-		if ($pass) $pass = $this->resize_crop_save($source, $base . 'img-full' . $name, 200);
-		if ($pass) $pass = $this->resize_crop_save($source, $base . 'img' . $name, 100);
+		if ($pass) $pass = $this->resize_crop_save($source, $base . 'full' . $name, 200);
+		if ($pass) $pass = $this->resize_crop_save($source, $base . 'sml' . $name, 100);
 		return $pass;
 	}
 	private function resize_crop_save( $source, $dest, $height ) {
@@ -125,13 +125,13 @@ class ELA {
 	public function clean_files() {
 		// set_time_limit(0);
 		// echo '<pre>';
-		// $base = __dir__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR;
-		// $source = array_diff(scandir($base . 'img-orig'), array('..', '.'));
+		// $base = __dir__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR;
+		// $source = array_diff(scandir($base . 'orig'), array('..', '.'));
 
 		// foreach ($source as $key => $image) {
-		// 	$resource =    imagecreatefromjpeg($base . 'img-orig' . DIRECTORY_SEPARATOR . $image);
-		// 	$this->resize_crop_save($resource, $base . 'img-full' . DIRECTORY_SEPARATOR . $image, 200);
-		// 	$this->resize_crop_save($resource, $base . 'img'      . DIRECTORY_SEPARATOR . $image, 100);
+		// 	$resource =    imagecreatefromjpeg($base . 'orig' . DIRECTORY_SEPARATOR . $image);
+		// 	$this->resize_crop_save($resource, $base . 'full' . DIRECTORY_SEPARATOR . $image, 200);
+		// 	$this->resize_crop_save($resource, $base . 'sml'      . DIRECTORY_SEPARATOR . $image, 100);
 		// 	echo $key . "\n";
 		// 	imagedestroy($resource);
 		// }
