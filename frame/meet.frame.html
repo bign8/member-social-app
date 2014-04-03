@@ -29,5 +29,21 @@
 			</div>
 		</div>
 
+		<div class="well clearfix">
+			<?php 
+				$request  = "http://www.kimonolabs.com/api/4xad9uwo?apikey=3d81ffa5911484983a0a11d64b931a48";
+				$response = file_get_contents($request);
+				$results  = json_decode($response, TRUE)['results']['collection1'];
+				$result   = $results[ array_rand($results) ];
+			?>
+			<blockquote>
+				<p><?php echo $result['quote']['text']; ?></p>
+				<footer>
+					<cite title="<?php echo $result['author']['text']; ?>"><?php echo $result['author']['text']; ?></cite>
+					(<a href="http://www.brainyquote.com/">source</a>)
+				</footer>
+			</blockquote>
+		</div>
+
 	</div>
 </div>
