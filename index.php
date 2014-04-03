@@ -51,7 +51,7 @@
 								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="#conference">Conference</a></li>
+								<li><a href="#myela">My ELA</a></li>
 								<li><a href="#profile">Profile</a></li>
 								<li><a href="index.php?action=logout">Logout</a></li>
 							</ul>
@@ -65,6 +65,8 @@
 	</div>
 
 	<div id="wrap" data-ng-app="ela">
+		<?php if ($auth) $ela_include('frame/meet.frame.html'); ?>
+
 		<?php $ela_include('frame/home.frame.html'); ?>
 
 		<?php $ela_include('frame/about.frame.html'); ?>
@@ -81,7 +83,7 @@
 
 		<?php if (!$auth) $ela_include('frame/login.frame.html'); ?>
 
-		<?php if ($auth) $ela_include('frame/conference.frame.html'); ?>
+		<?php if ($auth) $ela_include('frame/myELA.frame.html'); ?>
 
 		<?php if ($auth) $ela_include('frame/profile.frame.html'); ?>
 

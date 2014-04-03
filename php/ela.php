@@ -142,6 +142,16 @@ class ELA {
 		$sth->execute(array( $_SESSION['user']['accountno'] ));
 		return $sth->fetchAll( PDO::FETCH_ASSOC );
 	}
+
+	public function random_user() {
+		$sth = $this->db->prepare("SELECT * FROM user WHERE accountno != ? ORDER BY RANDOM() LIMIT 1;");
+		$sth->execute(array( $_SESSION['user']['accountno'] ));
+		return $sth->fetch( PDO::FETCH_ASSOC );
+	}
+
+	public function get_image( $user ) {
+		return $user['last'] . ',%20' . $user['first'] . '.jpg';
+	}
 }
 
 // if (isset($_REQUEST['cron'])) (new ELA())->clean_files();

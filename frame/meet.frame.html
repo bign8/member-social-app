@@ -1,0 +1,33 @@
+<div class="container" id="meet">
+
+	<div class="col-sm-4">
+		<img src="data/img/logo-black.png" alt="Emerging Leaders Academy" class="img-responsive thumbnail" style="padding:20px">
+	</div>
+
+	<div class="col-sm-8">
+
+		<div class="well clearfix">
+			<?php $random_user = $app->random_user(); ?>
+			<div class="col-sm-8">
+				<div class="page-header" style="margin-top:0">
+					<h1 style="margin-bottom:0">Meet <?php echo $random_user['first']; ?></h1>
+					<p>
+						<?php echo $random_user['title']; ?><br/>
+						<?php echo $random_user['company']; ?><br/>
+						<?php echo $random_user['city'] . ', ' . $random_user['state']; ?>
+					</p>
+				</div>
+				<p><?php echo $random_user['first'] . ' ' . $random_user['bio']; ?></p>
+			</div>
+			<div class="col-sm-4">
+				<div class="thumbnail">
+					<img src="img-full/<?php echo $app->get_image($random_user); ?>" alt="<?php echo $random_user['first'] . ' ' . $random_user['last']; ?>" >
+					<div class="caption text-center">
+						<h4 style="margin:0 auto"><?php echo $random_user['first'] . ' ' . $random_user['last']; ?></h4>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
