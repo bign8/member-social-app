@@ -99,7 +99,7 @@
 			</p>
 			<p class="text-muted credit">
 				&copy; <a href="http://upstreamacademy.com">Upstream Academy</a> 
-				<?php echo date('Y'); ?>
+				<?php date_default_timezone_set('America/Denver'); echo date('Y'); ?>
 			</p>
 		</div>
 	</div>
