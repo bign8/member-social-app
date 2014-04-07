@@ -96,7 +96,7 @@ class PROCESSOR {
 				$data[ $this->titles['city'] ],
 				$data[ $this->titles['state'] ],
 				iconv("SHIFT_JIS", "UTF-8", $data[ $this->titles['bio'] ]), // microsoft :( http://i-tools.org/charset
-				$data[ $this->titles['gradyear'] ], // no grad-year yet
+				'????', // $data[ $this->titles['gradyear'] ], // no grad-year yet
 				$data[ $this->titles['phone1'] ],
 				$data[ $this->titles['contsupref'] ], // email
 				$data[ $this->titles['username'] ],
@@ -226,7 +226,7 @@ class PROCESSOR {
 		if ( !in_array('city', $titles) ) die("No city title.");
 		if ( !in_array('state', $titles) ) die("No state title.");
 		if ( !in_array('bio', $titles) ) die("No bio title.");
-		if ( !in_array('gradyear', $titles) ) die("No gradyear title.");
+		// if ( !in_array('gradyear', $titles) ) die("No gradyear title.");
 		if ( !in_array('phone1', $titles) ) die("No phone1 title.");
 		if ( !in_array('contsupref', $titles) ) die("No contsupref title.");
 		if ( !in_array('username', $titles) ) die("No username title.");
