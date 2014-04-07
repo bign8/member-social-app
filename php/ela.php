@@ -14,8 +14,8 @@ class ELA {
 	}
 
 	public function login( $email, $password ) {
-		$sth  = $this->db->prepare("SELECT * FROM user WHERE email=?;");
-		$pass = $sth->execute(array( $email ));
+		$sth  = $this->db->prepare("SELECT * FROM user WHERE email=? OR user=?;");
+		$pass = $sth->execute(array( $email, $email ));
 		$user = $sth->fetch( PDO::FETCH_ASSOC );
 		$pass = $pass ? validate_password( $password, $user['pass'] ) : false ;
 
