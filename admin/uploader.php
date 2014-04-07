@@ -1,5 +1,7 @@
 <?php
 
+require_once(implode( DIRECTORY_SEPARATOR, array(__DIR__, '..', 'php', 'secure_pass.php') ));
+
 // Configuration
 $upload_name = implode( DIRECTORY_SEPARATOR, array(__DIR__, '..', 'data', 'admin', 'upload-data.csv') );
 
@@ -53,7 +55,7 @@ class UPLOADER {
 	}
 }
 
-/* Upload CSV Data
+//* Upload CSV Data
 $uploader = new UPLOADER( $upload_name );
 $uploader->execute();
 // */
@@ -69,8 +71,6 @@ class PROCESSOR {
 
 	public function process() {
 		$col_to_db_map = $this->processTitles();
-		print_r($col_to_db_map);
-		print_r($this->titles);
 
 		// Setup queries
 		$uGetSTH = $this->db->prepare("SELECT accountno FROM user WHERE accountno=?;");
@@ -79,8 +79,9 @@ class PROCESSOR {
 		$eGetSTH = $this->db->prepare("SELECT eventID FROM event WHERE name=? AND programYearID=?;");
 		$eAddSTH = $this->db->prepare("INSERT INTO event (name, programYearID) VALUES (?,?);");
 
-		$aGetSTH = $this->db->prepare("SELECT attendeeID FROM attendee WHERE userID=?,eventID=?,yearID=?;"); // WHAT IF EVENT CHANGES???
+		$aGetSTH = $this->db->prepare("SELECT attendeeID FROM attendee WHERE userID=? AND yearID=?;");
 		$aAddSTH = $this->db->prepare("INSERT INTO attendee (userID, eventID, yearID) vALUES (?,?,?);");
+		$aModSTH = $this->db->prepare("UPDATE attendee SET eventID=? WHERE attendeeID=?;");
 
 		// process rows
 		while (($data = fgetcsv($this->handle, 1000, ",")) !== FALSE) {
@@ -95,11 +96,11 @@ class PROCESSOR {
 				$data[ $this->titles['city'] ],
 				$data[ $this->titles['state'] ],
 				iconv("SHIFT_JIS", "UTF-8", $data[ $this->titles['bio'] ]), // microsoft :( http://i-tools.org/charset
-				'???', // $data[ $this->titles['gradyear'] ], // no grad-year yet
+				$data[ $this->titles['gradyear'] ], // no grad-year yet
 				$data[ $this->titles['phone1'] ],
 				$data[ $this->titles['contsupref'] ], // email
 				$data[ $this->titles['username'] ],
-				$data[ $this->titles['password'] ], // encrypt this please!!!!
+				create_hash($data[ $this->titles['password'] ]),
 				$data[ $this->titles['accountno'] ]
 			);
 			if (
@@ -113,14 +114,17 @@ class PROCESSOR {
 
 			// Add events  and attendees for each user
 			foreach ($col_to_db_map as $key => $value) {
-				echo $data[ $key ] . ' ' . print_r($value, true);
+				// echo $data[ $key ] . ' ' . print_r($value, true);
+
 
 				// Should we insert event?
+				$eventID = false;
 				switch ( strtolower($data[$key]) ) { // just check if key has numbers (ie: year)
 					case 'deferred':
-					case 'undecided':
 					case 'none':
-					case '': echo 'Skipped inserting event "' . $data[$key] . '"'; break;
+					case '': echo 'Skipped insert event "' . $data[$key] . '"<br/>' . "\r\n"; break;
+
+					case 'undecided': $eventID = null; break;
 
 					default:
 						// Insert event if not already there
@@ -133,9 +137,16 @@ class PROCESSOR {
 						}
 				}
 
-				
-				
-				// TODO: process attendee with aGetSTH and aAddSTH (WHAT IF EVENT CHANGES???)
+				// If we should do some sort of attendee add
+				if ($eventID !== false) {
+					$aGetSTH->execute(array( $data[ $this->titles['accountno'] ], $value['yrID'] ));
+					$attendeeID = $aGetSTH->fetchColumn();
+					if ($attendeeID) {
+						$aModSTH->execute(array( $eventID, $attendeeID )); // update attendee if it exists
+					} else {
+						$aAddSTH->execute(array( $data[ $this->titles['accountno'] ], $eventID, $value['yrID'] )); // insert attendee
+					}
+				}
 			}
 		}
 
@@ -147,6 +158,7 @@ class PROCESSOR {
 	private function processTitles() {
 		$titles = fgetcsv($this->handle);
 		$this->titles = array_flip(array_map('strtolower', $titles));
+		$this->validateTitles();
 
 		// Process program years
 		$title_pattern = "/^event ([0-9]{2}-[0-9]{2})$/i";
@@ -194,6 +206,32 @@ class PROCESSOR {
 		}
 		return $yearIDs;
 	}
+
+	// Ensure we have the required titles
+	private function validateTitles() {
+		echo '<p>Column titles as the script sees them.</p><pre>';
+		$titles = array_flip($this->titles);
+		print_r($titles);
+		echo '</pre>';
+
+		$event_titles = preg_grep("/^event ([0-9]{2}-[0-9]{2})$/i", $titles); // Parse for matching titles
+		
+		if ( sizeof($event_titles) < 1 ) die("No event titles matching the pattern /^event ([0-9]{2}-[0-9]{2})$/i.");
+		if ( !in_array('accountno', $titles) ) die("No accountno title.");
+		if ( !in_array('first', $titles) ) die("No first title.");
+		if ( !in_array('last', $titles) ) die("No last title.");
+		if ( !in_array('company', $titles) ) die("No company title.");
+		if ( !in_array('title', $titles) ) die("No title title.");
+		if ( !in_array('title', $titles) ) die("No title title.");
+		if ( !in_array('city', $titles) ) die("No city title.");
+		if ( !in_array('state', $titles) ) die("No state title.");
+		if ( !in_array('bio', $titles) ) die("No bio title.");
+		if ( !in_array('gradyear', $titles) ) die("No gradyear title.");
+		if ( !in_array('phone1', $titles) ) die("No phone1 title.");
+		if ( !in_array('contsupref', $titles) ) die("No contsupref title.");
+		if ( !in_array('username', $titles) ) die("No username title.");
+		if ( !in_array('password', $titles) ) die("No password title.");
+	}
 }
 
 //* Process CSV Data
@@ -202,7 +240,12 @@ $processor->process();
 // */
 
 __halt_compiler() ?>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<title>ELA Upload</title>
+	</head>
 	<body>
 		<h3>{{MSG}}</h3>
 		<form action="uploader.php" method="post" enctype="multipart/form-data">
@@ -211,6 +254,53 @@ __halt_compiler() ?>
 			<input type="hidden" name="hash" value="{{HASH_VALUE}}">
 			<input type="submit" name="submit" value="Upload">
 		</form>
-		<p>Full description of CSV format and required columns</p>
+		<p>
+			Below is a full list of columns that <strong>NEED</strong> to be in the CSV
+			<ul>
+				<li>
+					<code>accountno</code> A unique identifier for each user (should stay the same year to year)
+				</li>
+				<li>
+					<code>first</code> First name of the participant
+				</li>
+				<li>
+					<code>last</code> Last name of the participant
+				</li>
+				<li>
+					<code>company</code> The company of the participant
+				</li>
+				<li>
+					<code>title</code> The job title of the participant
+				</li>
+				<li>
+					<code>city</code> The address city of the participant
+				</li>
+				<li>
+					<code>state</code> The address state of the participant
+				</li>
+				<li>
+					<code>bio</code> The biography of the participant
+				</li>
+				<li>
+					<code>gradyear</code> The graduation year of the participant
+				</li>
+				<li>
+					<code>phone1</code> The phone number of the participant
+				</li>
+				<li>
+					<code>contsupref</code> The email number of the participant
+				</li>
+				<li>
+					<code>username</code> The username of the participant
+				</li>
+				<li>
+					<code>password</code> The password of the participant (unencrypted)
+				</li>
+				<li>
+					<code>event 14-15</code> At least one event (usually 3) that presents the year span in <code>[0-9]{2}-[0-9]{2}</code> format
+				</li>
+			</ul>
+			<i>* Note: the case of the titles does not matter (ie: <u>FIRST</u>, <u>FiRsT</u>, and <u>first</u> are the same)</i>
+		</p>
 	</body>
 </html>
