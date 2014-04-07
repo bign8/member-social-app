@@ -16,8 +16,22 @@
 				<div class="well">
 					<h2 style="margin-top:0">
 						Year #<?php echo $conference['year']; ?>
-						<small><?php echo $conference['name']; ?></small>
+						<small><?php echo (is_null($conference['eventID'])) ? 'Undecided': $conference['name']; ?></small>
 					</h2>
+					<?php if ( is_null($conference['eventID']) ): ?>
+						<p>
+							<span class="text-danger">
+								You have not chosen a conference to attend.<br/>
+								You should do this soon.<br/>
+								Below is a list of available conferences.
+							</span>
+							<ul>
+								<li>Conference 1 (<a href="#">about</a>)</li>
+								<li>Conference 2 (<a href="#">about</a>)</li>
+								<li>Conference 3 (<a href="#">about</a>)</li>
+							</ul>
+						</p>
+					<?php endif; ?>
 					<?php echo (is_null($conference['workbook'])) ? '' : '<a href="'. $conference['workbook'] .'">Workbook</a><br/>' ; ?>
 					<?php echo (is_null($conference['calendar'])) ? '' : '<a href="'. $conference['calendar'] .'">Calendar</a><br/>' ; ?>
 					<!-- <pre><?php print_r($conference); ?></pre> -->
