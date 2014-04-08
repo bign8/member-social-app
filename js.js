@@ -44,8 +44,8 @@ controller('search', ['$scope', '$http', '$modal', function ($scope, $http, $mod
 
 	// Initialize user data
 	$scope.users = $scope.filtered_users = [];
-	$http.get('api.php?action=search').then(function (res) {
-		$scope.users = res.data;
+	$http.get('api/search').then(function (res) {
+		$scope.users = res.data.data;
 
 		angular.forEach($scope.users, function (value) {
 			value.bio = value.first + /*' ' + value.Last +*/ ' ' + value.bio;
@@ -91,8 +91,8 @@ controller('search', ['$scope', '$http', '$modal', function ($scope, $http, $mod
 		});
 		instance.result.then(function (person) {
 			angular.extend(user, person);
-			$http.post('api.php?action=note', person).then(function (res) {
-				angular.extend(user, res.data);
+			$http.post('api/note', person).then(function (res) {
+				if (res.data.success) user.noteID = res.data.data;
 			});
 		});
 	};

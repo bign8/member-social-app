@@ -1,0 +1,10 @@
+ErrorDocument 404 /ela/api/404.php
+
+# http://stackoverflow.com/questions/8291712/using-clean-urls-in-restful-api
+
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /ela/api/
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteRule . index.php [L]
+</IfModule>
