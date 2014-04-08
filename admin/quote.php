@@ -61,13 +61,9 @@
 				</tr>
 			</tbody>
 		</table>
-		<!-- <pre>{{quotes | json}}</pre> -->
 	</div>
 
-	<!-- // <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
-	<!-- // <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script> -->
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
-	<!-- // <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.10.0.min.js"></script> -->
 	<script src="quote.js"></script>
 </body>
 </html>
