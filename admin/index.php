@@ -11,7 +11,7 @@
 	<p>This is your ELA anministration section.</p>
 	<ul>
 		<li><a href="uploader.php">Upload a CSV</a> of new data.</li>
-		<li></li>
+		<li><a href="quote.php">Create, Read, Update and Delete Quotes</a> that are used on the website.</li>
 		<li></li>
 	</ul>
 </body>
